@@ -1,7 +1,6 @@
 package quickSort;
 
-public class quickSort {
-
+public class quickSort3Way {
     //从0到n进行快速排序
     private static void _quickSort(int[] arr, int l, int r){
         if (l>=r){
@@ -13,21 +12,38 @@ public class quickSort {
 
     }
 
+    /**
+     * 双路法解决重复序列的排序
+     * i指向小于元素v的下一个值
+     * j指向大于v元素的上一个值
+     * @param arr
+     * @param l
+     * @param r
+     * @return
+     */
     private static int partial(int[] arr, int l, int r){
+        swap(arr, l , (int)Math.random()*(r-l+1)+l);
         //让第一个元素作为参照
         int v = arr[l];
         //设置j从l开始
-        int j = l;
-        //从l+1开始遍历
-        for (int i = l+1; i <= r; i++){
-            //如果参照的值大于现在指的值，就把当前值和j后面大于v的值交换，并且j++
-            if (v>arr[i]){
-                swap(arr, j+1, i);
-                j++;
+        int i = l+1;
+        int j = r;
+
+        while (true){
+            while (i<=r&&arr[i]<v){
+                i++;
             }
+            while (j>=l+1&&arr[j]>v){
+                j--;
+            }
+            if (i>j){
+                break;
+            }
+            swap(arr, i, j);
+            i++;
+            j--;
         }
-        //最后交换头和j所在的位置
-        swap(arr, l ,j);
+        swap(arr, l, j);
 
         return j;
     }
@@ -52,6 +68,6 @@ public class quickSort {
         for (int i : arr) {
             System.out.print(i+" ");
         }
-        System.out.println(endTime-startTime);
+        System.out.println((endTime-startTime)/Math.pow(10,9)+"s");
     }
 }

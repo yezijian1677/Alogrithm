@@ -1,7 +1,6 @@
 package quickSort;
 
-public class quickSort {
-
+public class quickSortNearlyOrder {
     //从0到n进行快速排序
     private static void _quickSort(int[] arr, int l, int r){
         if (l>=r){
@@ -14,6 +13,7 @@ public class quickSort {
     }
 
     private static int partial(int[] arr, int l, int r){
+        swap(arr, l , (int)Math.random()*(r-l+1)+l);
         //让第一个元素作为参照
         int v = arr[l];
         //设置j从l开始
