@@ -19,9 +19,32 @@ public class MaxHeap<Item extends Comparable> {
 
     public MaxHeap(int capacity) {
         // 不能直接声明泛型数组，只能先声明再强制转换
-        this.data = (Item[]) new Comparable[capacity];
+        this.data = (Item[]) new Comparable[capacity+1];
         count = 0;
         this.capacity = capacity;
+    }
+
+    /**
+     * Heapify的过程构造最大堆
+     */
+    public MaxHeap(Item[] arr){
+        int n = arr.length;
+        //新建数据量为n+1的堆
+        data = (Item[])new Comparable[n+1];
+        capacity = n;
+
+        //把数组赋值给堆
+        for (int i = 0; i < n; i++){
+            //堆序号从一开始
+            data[i+1] = arr[i];
+        }
+        //堆中元素为n
+        count = n;
+
+        //从下标为n/2的地方开始shiftdown，堆中最后一个非叶子节点为n/2，n是元素个数
+        for (int i = count/2; i>=1; i--){
+            shiftDown(i);
+        }
     }
 
     /**
