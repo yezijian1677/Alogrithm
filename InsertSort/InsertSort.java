@@ -14,6 +14,20 @@ public class InsertSort {
         }
     }
 
+    public static void InsertSort(int[] arr, int increment){
+        int len = arr.length;
+        for (int i = 1; i < len; i++){
+            for (int j = i; j>0 ; j=j+increment){
+                if (arr[j]<arr[j-1]){
+                    swap(arr, j, j-1);
+                } else {
+                    break;
+                }
+            }
+            increment = increment/2;
+        }
+    }
+
     private static void swap(int[] arr, int i, int j) {
         int tmp = arr[i];
         arr[i] = arr[j];
